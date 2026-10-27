@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>เดินทางไปกับพระธรรม: ยุโรป</title>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f0ff; --card:#ffffff; --ink:#1f2a5c; --muted:#5b6390;
+  --gold:#f5a623; --teal:#1fa392; --tealbg:#d9f5f0; --amber:#b86e00; --amberbg:#fff0d6;
+  --line:#d8d3f5; --accent:#4b4fd6; --onaccent:#fff;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141a3d; --card:#1f2756; --ink:#f1efff; --muted:#b4b9e6;
+    --tealbg:#12423f; --teal:#5fe0cd; --amberbg:#4a3512; --amber:#ffc765; --line:#39428a; --accent:#8a8dff; --onaccent:#101436;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141a3d; --card:#1f2756; --ink:#f1efff; --muted:#b4b9e6;
+  --tealbg:#12423f; --teal:#5fe0cd; --amberbg:#4a3512; --amber:#ffc765; --line:#39428a; --accent:#8a8dff; --onaccent:#101436;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:"Mali","Noto Sans Thai",Tahoma,sans-serif;font-size:clamp(17px,2.2vw,22px);line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding:18px 16px 40px}
+.screen{display:none}.screen.on{display:block}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.2;margin:8px 0 10px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:22px}
+.btn{font:inherit;font-weight:700;background:var(--accent);color:var(--onaccent);border:0;border-radius:16px;padding:14px 28px;cursor:pointer;font-size:1.05em}
+.btn:hover{filter:brightness(1.08)}
+.btn:focus-visible,.opt:focus-visible{outline:4px solid var(--gold);outline-offset:3px}
+.hero{text-align:center;padding:26px 18px}
+.big{font-size:64px;line-height:1}
+.rules{text-align:left;max-width:520px;margin:16px auto 22px;color:var(--muted)}
+.rules li{margin:4px 0}
+/* journey */
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;font-weight:700}
+.trail{display:flex;align-items:center;gap:0;margin:6px 0 14px}
+.stop{flex:1;display:flex;align-items:center}
+.dot{width:30px;height:30px;border-radius:50%;border:3px solid var(--line);background:var(--card);display:grid;place-items:center;font-size:15px;flex:none}
+.dot.now{border-color:var(--accent);transform:scale(1.15)}
+.dot.ok{background:var(--gold);border-color:var(--gold)}
+.dot.learn{background:var(--tealbg);border-color:var(--teal)}
+.seg{height:4px;flex:1;background:var(--line);margin:0 2px;border-radius:4px}
+.stop:last-child .seg{display:none}
+.timer{height:16px;background:var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.timer i{display:block;height:100%;width:100%;background:var(--teal);transform-origin:left;transition:background .3s}
+.timer i.low{background:var(--gold)}
+.q{font-size:1.2em;font-weight:700;margin:0 0 16px}
+.opts{display:grid;gap:12px}
+.opt{font:inherit;text-align:left;background:var(--card);color:var(--ink);border:3px solid var(--line);border-radius:16px;padding:14px 16px;cursor:pointer;display:flex;gap:12px;align-items:flex-start}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt b{flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg);display:grid;place-items:center}
+.opt:disabled{cursor:default}
+.opt.right{background:var(--tealbg);border-color:var(--teal)}
+.opt.mine{background:var(--amberbg);border-color:var(--gold)}
+.fb{margin-top:16px;border-radius:18px;padding:16px 18px;display:none}
+.fb.on{display:block}
+.fb.good{background:var(--tealbg);border:2px solid var(--teal)}
+.fb.try{background:var(--amberbg);border:2px solid var(--gold)}
+.fb h3{margin:0 0 6px;font-size:1.1em}
+.fb p{margin:0 0 12px}
+.score{font-size:1.1em}
+.result{text-align:center}
+.stamps{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:14px 0}
+.recap{text-align:left;margin:16px 0 20px;padding-left:20px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<section id="start" class="screen on">
+  <div class="card hero">
+    <div class="big">🧳🌍</div>
+    <h1>เดินทางไปกับพระธรรม<br>จากเอเชียสู่ยุโรป</h1>
+    <p>ทบทวนก่อนจบคาบ ใช้เวลาแค่ 10 นาที</p>
+    <ul class="rules">
+      <li>มี 10 ข้อ ข้อละ 20 วินาที</li>
+      <li>ตอบถูกได้ 10 คะแนน เก็บดาวบนเส้นทางการเดินทาง</li>
+      <li>ตอบผิดไม่เป็นไร เราจะเฉลยให้ทันที ทุกข้อคือโอกาสเรียนรู้</li>
+      <li>เล่นเป็นทีมหรือเล่นคนเดียวก็ได้ ไม่มีอันดับแพ้ชนะ</li>
+    </ul>
+    <button class="btn" id="go">เริ่มเดินทางกันเลย</button>
+  </div>
+</section>
+
+<section id="play" class="screen">
+  <div class="top"><span id="qn"></span><span class="score" id="sc"></span></div>
+  <div class="trail" id="trail" aria-hidden="true"></div>
+  <div class="timer" aria-hidden="true"><i id="bar"></i></div>
+  <div class="card">
+    <p class="q" id="qt"></p>
+    <div class="opts" id="opts"></div>
+    <div class="fb" id="fb" role="status" aria-live="polite">
+      <h3 id="fbh"></h3><p id="fbp"></p>
+      <button class="btn" id="next">ไปข้อต่อไป</button>
+    </div>
+  </div>
+</section>
+
+<section id="end" class="screen">
+  <div class="card result">
+    <div class="big" id="eicon">🏁</div>
+    <h1 id="etitle"></h1>
+    <p class="score" id="escore"></p>
+    <div class="stamps" id="stamps"></div>
+    <p id="emsg"></p>
+    <ul class="recap">
+      <li>ศตวรรษที่ 19 ชาวยุโรปเริ่มสนใจพุทธศาสนาจากการติดต่อกับเอเชีย</li>
+      <li>นักวิชาการและกวีช่วยแปลและเล่าเรื่องให้คนยุโรปรู้จักมากขึ้น</li>
+      <li>ปัจจุบันมีวัดพุทธและคนฝึกสมาธิในยุโรปจำนวนมาก</li>
+    </ul>
+    <button class="btn" id="again">เล่นอีกครั้ง</button>
+  </div>
+</section>
+
+</div>
+<script>
+var Q=[
+{q:"ชาวยุโรปเริ่มสนใจพุทธศาสนาอย่างจริงจังในช่วงใด",o:["ศตวรรษที่ 19","สมัยพุทธกาล","ศตวรรษที่ 5","ปี พ.ศ. 2600 เป็นต้นมา"],a:0,e:"ในศตวรรษที่ 19 ชาวยุโรปได้รู้จักพุทธศาสนามากขึ้น ผ่านการศึกษาและการสำรวจดินแดนเอเชีย"},
+{q:"อะไรทำให้ชาวยุโรปได้พบและรู้จักพุทธศาสนาก่อนใคร ๆ",o:["เดินทางไปตั้งอาณานิคมในเอเชีย เช่น ศรีลังกาและพม่า","ได้ดูหนังพุทธประวัติ","พระพุทธเจ้าเสด็จไปยุโรปด้วยพระองค์เอง","รับฟังทางวิทยุ"],a:0,e:"ชาวยุโรปที่ไปค้าขายและปกครองดินแดนในเอเชียได้เห็นวิถีชีวิตชาวพุทธ แล้วนำความรู้กลับไปเล่าที่ยุโรป"},
+{q:"นักปรัชญาชาวเยอรมันคนไหนที่สนใจแนวคิดของพุทธศาสนา",o:["อาร์เธอร์ โชเปนเฮาเออร์","ไอแซก นิวตัน","คริสโตเฟอร์ โคลัมบัส","ลีโอนาร์โด ดา วินชี"],a:0,e:"โชเปนเฮาเออร์ (ศตวรรษที่ 19) สนใจเรื่องความทุกข์และการดับทุกข์ ซึ่งใกล้เคียงกับอริยสัจ 4"},
+{q:"สมาคมบาลีปกรณ์ (Pali Text Society) ที่อังกฤษ ทำอะไร",o:["ศึกษาและแปลพระไตรปิฎกภาษาบาลีเป็นภาษาอังกฤษ","สร้างวัดทั่วยุโรป","ขายของที่ระลึกทางพุทธศาสนา","จัดแข่งกีฬาของชาวพุทธ"],a:0,e:"สมาคมนี้ก่อตั้งในปี ค.ศ. 1881 ช่วยให้คนยุโรปอ่านพระไตรปิฎกได้โดยไม่ต้องรู้ภาษาบาลี"},
+{q:"หนังสือ The Light of Asia ของเอ็ดวิน อาร์โนลด์ เล่าเรื่องอะไร",o:["พุทธประวัติในรูปแบบกวีนิพนธ์","การเดินทางของมาร์โคโปโล","ประวัติศาสตร์กรุงโรม","วิธีทำอาหารเอเชีย"],a:0,e:"หนังสือเล่มนี้เผยแพร่ในปี ค.ศ. 1879 เล่าพุทธประวัติให้คนอ่านชาวตะวันตกเข้าใจได้ง่าย จึงได้รับความนิยมมาก"},
+{q:"วัดไทยแห่งแรกในประเทศอังกฤษ ที่ตั้งในกรุงลอนดอน ชื่อว่าอะไร",o:["วัดพุทธปทีป","วัดพระแก้ว","วัดโพธิ์","วัดอรุณ"],a:0,e:"วัดพุทธปทีป ตั้งขึ้นเมื่อปี ค.ศ. 1966 เป็นศูนย์รวมใจชาวพุทธและเป็นที่เรียนรู้ของคนท้องถิ่น"},
+{q:"พระธรรมทูตที่เดินทางไปต่างประเทศมีหน้าที่หลักอะไร",o:["เผยแผ่หลักธรรมคำสอนของพุทธศาสนา","ค้าขายสินค้า","ปกครองประเทศ","นำทัพไปสู้รบ"],a:0,e:"พระธรรมทูตคือพระสงฆ์ที่ไปแนะนำหลักธรรมอย่างสันติ ให้คำปรึกษา และสอนสมาธิให้ผู้สนใจ"},
+{q:"ข้อใดคือเหตุผลที่คนยุโรปหลายคนประทับใจพุทธศาสนา",o:["สอนให้ใช้เหตุผลและทดลองปฏิบัติเพื่อพิสูจน์ด้วยตนเอง","บังคับให้เชื่อโดยไม่ต้องคิด","ต้องจ่ายเงินจึงจะเรียนได้","มีแต่พิธีกรรมที่ซับซ้อน"],a:0,e:"หลักกาลามสูตรสอนให้ไตร่ตรองก่อนเชื่อ ซึ่งเข้ากับคนยุโรปที่ชอบใช้เหตุผลและวิทยาศาสตร์"},
+{q:"ปัจจุบันชาวยุโรปจำนวนมากสนใจเรื่องใดของพุทธศาสนาเป็นพิเศษ",o:["การฝึกสมาธิและสติ","การสร้างเจดีย์","การแข่งเรือยาว","การทำบุญตักบาตรอย่างเดียว"],a:0,e:"หลายคนฝึกสมาธิเพื่อลดความเครียดและอยู่กับปัจจุบัน แม้ไม่ได้เปลี่ยนศาสนาก็ตาม"},
+{q:"พุทธศาสนาเข้าสู่ยุโรปแตกต่างจากเอเชียอย่างไร",o:["ส่วนใหญ่เริ่มจากนักวิชาการและผู้สนใจศึกษาด้วยตนเอง","กษัตริย์ยุโรปสั่งให้ทุกคนนับถือ","เริ่มจากกองทัพเอเชีย","เริ่มพร้อมกันทั่วทวีปในวันเดียว"],a:0,e:"ในยุโรป พุทธศาสนาค่อย ๆ แพร่หลายจากการศึกษา การแปลคัมภีร์ และการสนใจของประชาชน ไม่ใช่การบังคับ"}
+];
+var good=["เยี่ยมมาก! 🌟","ถูกต้อง ไปต่อเลย! 🎉","สุดยอด เก่งมาก! 👏","ใช่เลย! ✨"];
+var tryy=["ไม่เป็นไรนะ ข้อนี้เราได้เรียนรู้ไปพร้อมกัน 💡","เกือบแล้ว มาดูคำตอบกัน 😊","ข้อนี้ท้าทายจริง ๆ เก็บไว้เป็นความรู้ใหม่ 🌱","หมดเวลาแล้ว ไม่เป็นไร มาดูเฉลยกัน ⏰"];
+var $=function(i){return document.getElementById(i)};
+var i=0,score=0,res=[],tm=null,t0=0,locked=false,TOTAL=20000;
+function show(id){["start","play","end"].forEach(function(s){$(s).classList.toggle("on",s===id)})}
+function trail(){
+  $("trail").innerHTML=Q.map(function(_,k){
+    var c="dot"+(k===i&&!res[k]?" now":"")+(res[k]==="ok"?" ok":res[k]==="learn"?" learn":"");
+    var ic=res[k]==="ok"?"⭐":res[k]==="learn"?"💡":(k+1);
+    return '<div class="stop"><div class="'+c+'">'+ic+'</div><div class="seg"></div></div>';
+  }).join("");
+}
+function start(){i=0;score=0;res=[];show("play");load()}
+function load(){
+  locked=false;var d=Q[i];
+  $("qn").textContent="ข้อ "+(i+1)+" จาก "+Q.length;
+  $("sc").textContent="คะแนน "+score;
+  $("qt").textContent=d.q;
+  $("fb").className="fb";
+  var idx=d.o.map(function(_,k){return k});
+  for(var k=idx.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1));var t=idx[k];idx[k]=idx[j];idx[j]=t}
+  $("opts").innerHTML="";
+  idx.forEach(function(oi,pos){
+    var b=document.createElement("button");b.className="opt";b.dataset.k=oi;
+    b.innerHTML="<b>"+"กขคง".charAt(pos)+"</b><span></span>";
+    b.lastChild.textContent=d.o[oi];
+    b.onclick=function(){answer(oi)};
+    $("opts").appendChild(b);
+  });
+  trail();
+  $("bar").style.transition="none";$("bar").style.transform="scaleX(1)";$("bar").classList.remove("low");
+  t0=Date.now();clearInterval(tm);
+  tm=setInterval(tick,100);
+}
+function tick(){
+  var left=Math.max(0,TOTAL-(Date.now()-t0));
+  $("bar").style.transform="scaleX("+(left/TOTAL)+")";
+  $("bar").classList.toggle("low",left<6000);
+  if(left<=0)answer(-1);
+}
+function answer(k){
+  if(locked)return;locked=true;clearInterval(tm);
+  var d=Q[i],ok=(k===d.a);
+  Array.prototype.forEach.call($("opts").children,function(b){
+    b.disabled=true;
+    var bk=+b.dataset.k;
+    if(bk===d.a)b.classList.add("right");
+    else if(bk===k)b.classList.add("mine");
+  });
+  if(ok){score+=10;res[i]="ok"}else res[i]="learn";
+  $("sc").textContent="คะแนน "+score;
+  trail();
+  var f=$("fb");f.className="fb on "+(ok?"good":"try");
+  var pool=ok?good:(k===-1?[tryy[3]]:tryy.slice(0,3));
+  $("fbh").textContent=(ok?"+10 คะแนน ":"")+pool[Math.floor(Math.random()*pool.length)];
+  $("fbp").textContent=(ok?"":"คำตอบที่ถูกคือ “"+d.o[d.a]+"” ")+d.e;
+  $("next").textContent=i===Q.length-1?"ดูผลการเดินทาง":"ไปข้อต่อไป";
+  $("next").focus({preventScroll:true});
+  f.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function finish(){
+  show("end");
+  var n=score/10;
+  $("escore").textContent="คุณเก็บดาวได้ "+n+" ดวง รวม "+score+" คะแนน";
+  var t,m,ic;
+  if(n>=9){t="นักเดินทางตัวจริง!";m="เก่งมาก จำได้เกือบทุกข้อเลย";ic="🏆"}
+  else if(n>=6){t="เดินทางมาไกลแล้ว!";m="ทำได้ดีมาก ข้อที่พลาดคือความรู้ใหม่ที่ได้เพิ่ม";ic="🌟"}
+  else if(n>=3){t="ก้าวหน้าไปอีกขั้น!";m="ทุกข้อที่เฉลยคือความรู้ที่เพิ่มขึ้น ลองเล่นอีกรอบจะเก่งขึ้นแน่นอน";ic="🌱"}
+  else{t="ได้ออกเดินทางแล้ว!";m="การได้ลองก็เก่งแล้ว ตอนนี้ได้รู้จักเรื่องนี้มากขึ้นกว่าตอนเริ่ม ลองอีกรอบได้เลย";ic="🧳"}
+  $("etitle").textContent=t;$("emsg").textContent=m;$("eicon").textContent=ic;
+  $("stamps").innerHTML=res.map(function(r){return '<div class="dot '+r+'">'+(r==="ok"?"⭐":"💡")+'</div>'}).join("");
+}
+$("go").onclick=start;
+$("again").onclick=start;
+$("next").onclick=function(){if(i<Q.length-1){i++;load()}else finish()};
+</script>
+</body>
+</html>
